@@ -1,7 +1,5 @@
 package aoc.days
 
-import java.io.File
-
 object Day1 : AocBase<Int>() {
 
     override var exampleResultPart1 = 142
