@@ -45,8 +45,3 @@ object Day1 : AocBase<Int>() {
     private fun String.textualRepresentationToDigits(): String =
         this.windowed(5, 1, true).map { it.replaceTextualRepresentation() }.toString()
 }
-
-fun main() {
-    Day1.solvePart(1)
-    Day1.solvePart(2)
-}

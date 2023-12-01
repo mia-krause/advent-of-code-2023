@@ -1,22 +1,15 @@
 package aoc.days
 
+import aoc.ChristmasPrinter
 import java.io.File
 
-abstract class AocBase<Result> {
+abstract class AocBase<Result : Any> {
     private val day: String = this::class.simpleName?.replace(Regex("[^0-9]"), "")!!
 
     abstract val exampleResultPart1: Result
     abstract val exampleResultPart2: Result
     abstract val part1: (input: List<String>)-> Result
     abstract val part2: (input: List<String>)-> Result
-
-    private val yellow = "\u001b[33m"
-    private val red = "\u001b[31m"
-    private val brightRed = "\u001b[91m"
-    private val green = "\u001b[32m"
-    private val brightGreen = "\u001b[92m"
-    private val reset = "\u001b[0m"
-    private val christmasBorder="$reset*$red~$brightGreen*$reset~$brightRed*$green~$reset".repeat(5)
 
     private fun readFile(partNo: Int, example: Boolean = false): List<String> {
         var filename = "src/main/resources/input_day_$day"
@@ -32,18 +25,18 @@ abstract class AocBase<Result> {
         require(input.isNotEmpty()) { "Input file is empty"}
         val exampleResult = func(input)
         require(expectedExampleResult == exampleResult) { "Example: ❌ Expected $expectedExampleResult, but calculated $exampleResult" }
-        println("${green}Example$reset: ✅ $exampleResult")
+        ChristmasPrinter.printExample(exampleResult)
     }
 
     private fun solveActualTask(partNo: Int, func: (List<String>) -> Result) {
         val input = readFile(partNo, false)
         require(input.isNotEmpty()) { "Input file is empty"}
         val result = func(input)
-        println("${green}Actual solution$reset: $result")
+        ChristmasPrinter.printActualPuzzleSolution(result)
     }
 
     private fun solvePart(partNo: Int, expectedExampleResult: Result, func: (List<String>) -> Result) {
-        println("$christmasBorder$brightGreen Part $partNo $reset$christmasBorder")
+        ChristmasPrinter.printPartHeader(partNo)
         solveExample(partNo, expectedExampleResult, func)
         solveActualTask(partNo, func)
     }
