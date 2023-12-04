@@ -8,18 +8,18 @@ class Day4 : AocBase<Int>() {
 
     override fun part1(input: List<String>): Int = input.map { Card.from(it) }.sumOf { it.points() }
     override fun part2(input: List<String>): Int {
-        val cards = input.map { Card.from(it) }.associateBy { it.idx }
-        var counter = 0;
-        var cardsToEvaluate = cards.values
-        while (cardsToEvaluate.isNotEmpty()) {
-            counter += cardsToEvaluate.size
-            cardsToEvaluate = evaluateCards(cardsToEvaluate, cards)
+        val cards = input.map { Card.from(it) }
+        val copyCountByCard: MutableMap<Card, Int> =  cards.associateWith { 1 }.toMutableMap()
+        cards.forEach {card ->
+            val score = card.matches.size
+            cards
+                .dropWhile { it != card }
+                .drop(1)
+                .take(score)
+                .forEach { copyCountByCard[it] = (copyCountByCard[it]!! + copyCountByCard[card]!!)  }
         }
-        return counter
+        return copyCountByCard.values.sum()
     }
-
-    private fun evaluateCards(newCards: Collection<Card>, originalCards: Map<Int, Card>): Collection<Card> =
-        newCards.map { (it.idx + 1..it.idx + it.matches.size).mapNotNull(originalCards::get) }.flatten()
 
     data class Card(val idx: Int, val winningNumbers: Set<Int>, val actualNumbers: Set<Int>) {
         val matches: Set<Int> = actualNumbers intersect winningNumbers
