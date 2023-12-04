@@ -16,7 +16,10 @@ abstract class AocBase<Result : Any> {
   private fun readFile(partNo: Int, example: Boolean = false): List<String> {
     var filename = "src/main/resources/input_day_$day"
     if (example) filename += "_example_part$partNo"
-    val source = File(filename).bufferedReader()
+    val source = try { File(filename).bufferedReader() } catch (e: Exception) {
+      if (example && partNo==2) File("src/main/resources/input_day_$day"+ "_example_part1").bufferedReader()
+      else throw e
+    }
     val list = source.readLines()
     source.close()
     return list

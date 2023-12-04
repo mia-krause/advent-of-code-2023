@@ -4,7 +4,7 @@ import aoc.days.*
 import aoc.utils.ChristmasPrinter
 import java.time.LocalDateTime
 
-const val solveCurrentDayOnly = true
+const val solveCurrentDayOnly = false
 val currentDay = LocalDateTime.now().dayOfMonth
 
 fun main() {

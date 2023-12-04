@@ -1,8 +1,6 @@
 package aoc.days
 
-import aoc.utils.coordinates.ValueAtXyCoordinate
-import aoc.utils.coordinates.ValueAtXyCoordinates
-import aoc.utils.coordinates.XyCoordinate
+import aoc.utils.coordinates.*
 import aoc.utils.toCharsAtXyCoordinates
 
 class Day3 : AocBase<Int>() {
@@ -12,7 +10,7 @@ class Day3 : AocBase<Int>() {
     override fun part1(input: List<String>): Int {
         val symbols = symbolsFromEngineSchematic(input)
         val parts = possiblePartsFromEngineSchematic(input).filter { it.isPartNumber(symbols) }
-        return parts.sumOf { it.partNumber }
+        return parts.sumOf { it.value }
     }
 
     override fun part2(input: List<String>): Int {
@@ -20,42 +18,21 @@ class Day3 : AocBase<Int>() {
         val parts = possiblePartsFromEngineSchematic(input).filter { it.isPartNumber(possibleGears) }
         val gears =
             possibleGears.associateWith { parts.filter { part -> part.isAdjacentTo(it) } }.filter { it.value.size == 2 }
-        return gears.values.sumOf { it.first().partNumber * it.last().partNumber }
+        return gears.values.sumOf { it.first().value * it.last().value }
     }
 
     private fun symbolsFromEngineSchematic(input: List<String>): List<ValueAtXyCoordinate<Char>> {
         return input.toCharsAtXyCoordinates().filter { it.value != ' ' && it.value != '.' && !it.value.isDigit() }
     }
 
-    private fun possiblePartsFromEngineSchematic(input: List<String>): List<PossiblePart> {
-        val possibleParts = mutableListOf<PossiblePart>()
-        input.forEachIndexed { y, row ->
-            var currentPossiblePartNumber = ""
-            val currentPossiblePartCoordinates = mutableListOf<XyCoordinate>()
-            row.forEachIndexed { x, char ->
-                if (char.isDigit()) {
-                    currentPossiblePartNumber += char
-                    currentPossiblePartCoordinates.add(XyCoordinate(x, y))
-                } else if (currentPossiblePartNumber.isNotEmpty()) {
-                    possibleParts.add(
-                        PossiblePart(currentPossiblePartNumber.toInt(), currentPossiblePartCoordinates.toList())
-                    )
-                    currentPossiblePartNumber = ""
-                    currentPossiblePartCoordinates.clear()
-                }
-            }
-            if (currentPossiblePartNumber.isNotEmpty()) {
-                possibleParts.add(
-                    PossiblePart(currentPossiblePartNumber.toInt(), currentPossiblePartCoordinates.toList())
-                )
-            }
-        }
-        return possibleParts
+    private fun possiblePartsFromEngineSchematic(input: List<String>): List<ValueAtXyCoordinates<Int>> {
+        val digitsAtXyCoordinate = input.toCharsAtXyCoordinates().filter { it.value.isDigit() }
+        return digitsAtXyCoordinate.horizontalChunks().map { it.join().toIntValueAtXyCoordinates() }
     }
 
-    data class PossiblePart(val partNumber: Int, val xyCoordinates: List<XyCoordinate>) :
-        ValueAtXyCoordinates<Int>(partNumber, xyCoordinates) {
-        fun isPartNumber(symbols: List<ValueAtXyCoordinate<Char>>) =
-            symbols.any() { it.coordinate in adjacentCoordinates() }
-    }
+    private fun ValueAtXyCoordinates<Int>.isPartNumber(symbols: List<ValueAtXyCoordinate<Char>>) =
+        symbols.any { it.coordinate in adjacentCoordinates() }
+
+    private fun ValueAtXyCoordinates<String>.toIntValueAtXyCoordinates() =
+        ValueAtXyCoordinates(value.toInt(), coordinates)
 }

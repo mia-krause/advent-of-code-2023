@@ -24,4 +24,15 @@ open class XyCoordinate(val x: Int, val y: Int) {
     }
 
     override fun toString(): String = "($x, $y)"
+
+    override fun equals(other: Any?): Boolean {
+        if (other !is XyCoordinate) return false
+        return other.x == x && other.y == y
+    }
+
+    override fun hashCode(): Int {
+        var result = x
+        result = 31 * result + y
+        return result
+    }
 }
