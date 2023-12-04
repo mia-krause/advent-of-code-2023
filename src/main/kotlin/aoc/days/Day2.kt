@@ -37,12 +37,16 @@ class Day2 : AocBase<Int>() {
 
   override fun part1(input: List<String>): Int {
     val cubeSetLimit = CubeSet(14, 13, 12)
-    val maxColoursPerGame: Map<Int, CubeSet> = input.map { gameFromString(it)}.associate{it.idx to it.maxPerColour() }
-    return maxColoursPerGame.filter {
+    val maxColoursPerGame: Map<Int, CubeSet> =
+      input.map { gameFromString(it) }.associate { it.idx to it.maxPerColour() }
+    return maxColoursPerGame
+      .filter {
         it.value.blue <= cubeSetLimit.blue &&
           it.value.green <= cubeSetLimit.green &&
           it.value.red <= cubeSetLimit.red
-      }.keys.sum()
+      }
+      .keys
+      .sum()
   }
 
   override fun part2(input: List<String>): Int =

@@ -1,6 +1,6 @@
 package aoc.days
 
-import aoc.ChristmasPrinter
+import aoc.utils.ChristmasPrinter
 import java.io.File
 
 abstract class AocBase<Result : Any> {

@@ -1,4 +1,4 @@
-package aoc
+package aoc.utils
 
 object ChristmasPrinter {
   private const val YELLOW = "\u001b[33m"
@@ -8,32 +8,32 @@ object ChristmasPrinter {
   private const val GREEN = "\u001b[32m"
   private const val BRIGHT_GREEN = "\u001b[92m"
   private const val RESET = "\u001b[0m"
-  private const val BORING_VERTICAL_BORDER = "$RED║$RESET"
-  private const val BORING_EDGE_TOP_LEFT = "$RED╔$RESET"
-  private const val BORING_EDGE_TOP_RIGHT = "$RED╗$RESET"
-  private const val BORING_EDGE_BOTTOM_LEFT = "$RED╚$RESET"
-  private const val BORING_EDGE_BOTTOM_RIGHT = "$RED╝$RESET"
-  private const val BORING_SECTION_NODE_LEFT = "$RED╠$RESET"
-  private const val BORING_SECTION_NODE_RIGHT = "$RED╣$RESET"
-  private const val SPARKLE = "$RED˗${YELLOW}ˏ${BRIGHT_YELLOW}ˋ✰´${YELLOW}ˎ$RED˗$RESET"
+  private const val BORING_VERTICAL_BORDER = "${RED}║$RESET"
+  private const val BORING_EDGE_TOP_LEFT = "${RED}╔$RESET"
+  private const val BORING_EDGE_TOP_RIGHT = "${RED}╗$RESET"
+  private const val BORING_EDGE_BOTTOM_LEFT = "${RED}╚$RESET"
+  private const val BORING_EDGE_BOTTOM_RIGHT = "${RED}╝$RESET"
+  private const val BORING_SECTION_NODE_LEFT = "${RED}╠$RESET"
+  private const val BORING_SECTION_NODE_RIGHT = "${RED}╣$RESET"
+  private const val SPARKLE = "${RED}˗${YELLOW}ˏ${BRIGHT_YELLOW}ˋ✰´${YELLOW}ˎ${RED}˗$RESET"
   private val boringHorizontalBorder = RED + ("═".repeat(17)) + RESET
   private val christmasBorder =
     "$RESET*$RED~$BRIGHT_GREEN*$RESET~$BRIGHT_RED*$GREEN~$RESET".repeat(3)
 
   private val asciiHeaders =
     listOf(
-      """$BORING_VERTICAL_BORDER       ⡠⠖⠋⠉$RED⠙⣷⣶⡤$RESET⢄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀ ⠀⠀$BORING_VERTICAL_BORDER
-$BORING_VERTICAL_BORDER    $RED⢀⣾⣷⣦⡀$RESET⠀⠀$RED⢸⣿⣷$RESET⠀⠀⠉$RED⣷⣶⡤$RESET⢄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀   $BORING_VERTICAL_BORDER
-$BORING_VERTICAL_BORDER    $RED⣸⠿⠿⢿⣷⡤$RESET⢤$RED⣸⣿⡿$RESET⠀⠀⠀$RED⢹⣿⡇$RESET⠀⠀$RED⠙⣷⣶$RESET⠤⣄⣀⠀⠀⠀   ⠀ ⠀$BORING_VERTICAL_BORDER
-$BORING_VERTICAL_BORDER    ⠇⠀⠀⠀⢸$RED⣀$RESET⠀⠀⠈⠙⠒⠢$RED⢤⣿⣿⡇$RESET⠀⠀⠀$RED⣿⣿⡆$RESET⠀⠀$RED⢹⣿⡖$RESET⠤⢤⡀   $BORING_VERTICAL_BORDER
-$BORING_VERTICAL_BORDER    ⠸⡀⠀$RED⣠⣾⣿⠏$RESET⠓⠲⡀⠀⠀⠀⠀⠈⠉⠓⠢⠤$RED⣿⣿⠃$RESET⠀⠀$RED⢀⣿⣿$RESET⠀⠀⢱   $BORING_VERTICAL_BORDER
-$BORING_VERTICAL_BORDER    ⠀⠑$RED⢾⣿⣿⡟$RESET⠀⠀  ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠒⠢$RED⠼⣿⣿$RESET⠀⢀⠆   $BORING_VERTICAL_BORDER
-$BORING_VERTICAL_BORDER      ⠀⠀$RED⠉⠛⠦$RESET⠤⣀⠌⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  $RED⠈$RESET⠉⠉⠀     $BORING_VERTICAL_BORDER""",
+      """$BORING_VERTICAL_BORDER       ⡠⠖⠋⠉${RED}⠙⣷⣶⡤${RESET}⢄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀⠀⠀⠀ ⠀⠀$BORING_VERTICAL_BORDER
+$BORING_VERTICAL_BORDER    ${RED}⢀⣾⣷⣦⡀${RESET}⠀⠀${RED}⢸⣿⣷${RESET}⠀⠀⠉${RED}⣷⣶⡤${RESET}⢄⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀ ⠀⠀   $BORING_VERTICAL_BORDER
+$BORING_VERTICAL_BORDER    ${RED}⣸⠿⠿⢿⣷⡤${RESET}⢤${RED}⣸⣿⡿${RESET}⠀⠀⠀${RED}⢹⣿⡇${RESET}⠀⠀${RED}⠙⣷⣶${RESET}⠤⣄⣀⠀⠀⠀   ⠀ ⠀$BORING_VERTICAL_BORDER
+$BORING_VERTICAL_BORDER    ⠇⠀⠀⠀⢸${RED}⣀${RESET}⠀⠀⠈⠙⠒⠢${RED}⢤⣿⣿⡇${RESET}⠀⠀⠀${RED}⣿⣿⡆${RESET}⠀⠀${RED}⢹⣿⡖${RESET}⠤⢤⡀   $BORING_VERTICAL_BORDER
+$BORING_VERTICAL_BORDER    ⠸⡀⠀${RED}⣠⣾⣿⠏${RESET}⠓⠲⡀⠀⠀⠀⠀⠈⠉⠓⠢⠤${RED}⣿⣿⠃${RESET}⠀⠀${RED}⢀⣿⣿${RESET}⠀⠀⢱   $BORING_VERTICAL_BORDER
+$BORING_VERTICAL_BORDER    ⠀⠑${RED}⢾⣿⣿⡟${RESET}⠀⠀  ⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠒⠢${RED}⠼⣿⣿${RESET}⠀⢀⠆   $BORING_VERTICAL_BORDER
+$BORING_VERTICAL_BORDER      ⠀⠀${RED}⠉⠛⠦${RESET}⠤⣀⠌⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ${RED}⠈${RESET}⠉⠉⠀     $BORING_VERTICAL_BORDER""",
       """$BORING_VERTICAL_BORDER                      $BRIGHT_YELLOW*                     $BORING_VERTICAL_BORDER
 $BORING_VERTICAL_BORDER                     $BRIGHT_GREEN/'\                    $BORING_VERTICAL_BORDER
-$BORING_VERTICAL_BORDER                    $BRIGHT_GREEN/$RED°$BRIGHT_GREEN.$BRIGHT_YELLOW'$BRIGHT_GREEN\                   $BORING_VERTICAL_BORDER
-$BORING_VERTICAL_BORDER                   $BRIGHT_GREEN/.$BRIGHT_YELLOW'$BRIGHT_GREEN▹.$RED°$BRIGHT_GREEN\                  $BORING_VERTICAL_BORDER
-$BORING_VERTICAL_BORDER                  $BRIGHT_GREEN´⎺⎺$YELLOW⌊_⌋$BRIGHT_GREEN⎺⎺`                 $BORING_VERTICAL_BORDER""",
+$BORING_VERTICAL_BORDER                    $BRIGHT_GREEN/${RED}°$BRIGHT_GREEN.$BRIGHT_YELLOW'$BRIGHT_GREEN\                   $BORING_VERTICAL_BORDER
+$BORING_VERTICAL_BORDER                   $BRIGHT_GREEN/.$BRIGHT_YELLOW'${BRIGHT_GREEN}▹.${RED}°$BRIGHT_GREEN\                  $BORING_VERTICAL_BORDER
+$BORING_VERTICAL_BORDER                  ${BRIGHT_GREEN}´⎺⎺${YELLOW}⌊_⌋${BRIGHT_GREEN}⎺⎺`                 $BORING_VERTICAL_BORDER""",
       """$BORING_VERTICAL_BORDER                   $GREEN.......                  $BORING_VERTICAL_BORDER
 $BORING_VERTICAL_BORDER                $GREEN.::::${BRIGHT_YELLOW}o$GREEN::::::.               $BORING_VERTICAL_BORDER
 $BORING_VERTICAL_BORDER               $GREEN.:::´´   ``:${BRIGHT_YELLOW}o$GREEN:.              $BORING_VERTICAL_BORDER

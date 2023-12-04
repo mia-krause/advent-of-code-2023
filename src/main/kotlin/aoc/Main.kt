@@ -1,10 +1,10 @@
 package aoc
 
-import aoc.days.Day1
-import aoc.days.Day2
+import aoc.days.*
+import aoc.utils.ChristmasPrinter
 import java.time.LocalDateTime
 
-const val solveCurrentDayOnly = false
+const val solveCurrentDayOnly = true
 val currentDay = LocalDateTime.now().dayOfMonth
 
 fun main() {
@@ -27,4 +27,5 @@ val days =
   mapOf(
     1 to Day1(),
     2 to Day2(),
+    3 to Day3(),
   )
